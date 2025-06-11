@@ -100,8 +100,6 @@ weather-dashboard/
 
 ### OpenWeatherMap Endpoints
 
-https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_KEY
-
 -   **Current Weather**: `https://api.openweathermap.org/data/2.5/weather`
 -   **5-Day Forecast**: `https://api.openweathermap.org/data/2.5/forecast`
 -   **Required Parameters**: API key, city name or coordinates
