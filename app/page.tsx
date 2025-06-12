@@ -2,12 +2,17 @@
 
 import { useEffect, useState } from "react";
 import CurrentWeatherCard from "./components/CurrentWeatherCard";
+import Header from "./components/Header";
 
 export default function Home() {
-	const [currentTemp, setCurrentTemp] = useState("");
-	const [currentLocation, setCurrentLocation] = useState("");
+	const [currentTemp, setCurrentTemp] = useState(0);
+	const [currentCondition, setCurrentCondition] = useState(0);
+	const [currentCity, setCurrentCity] = useState("");
+	const [currentCountry, setCurrentCountry] = useState("");
+
 	const [error, setError] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
+	const [isDarkMode, setIsDarkMode] = useState(true);
 
 	const fetchWeather = async () => {
 		try {
@@ -26,8 +31,10 @@ export default function Home() {
 				return;
 			}
 
-			setCurrentTemp(data.main.temp);
-			setCurrentLocation(data.name);
+			setCurrentTemp(Math.floor(data.main.temp));
+			setCurrentCity(data.name);
+			setCurrentCondition(data.weather[0].id);
+			setCurrentCountry(data.sys.country);
 		} catch {
 			setError(true);
 		} finally {
@@ -39,6 +46,10 @@ export default function Home() {
 		fetchWeather();
 	}, []);
 
+	function toggleDarkMode() {
+		setIsDarkMode((prevMode: boolean) => !prevMode);
+	}
+
 	if (isLoading) {
 		return (
 			<div className="flex items-center justify-center h-screen font-sans">
@@ -49,13 +60,13 @@ export default function Home() {
 
 	return (
 		<div className="flex items-center flex-col justify-start m-4 h-screen font-sans">
-			<h1 className="flex justify-center items-start m-20 text-5xl font-bold">
-				The Weather
-			</h1>
+			<Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
 			{!error ? (
 				<CurrentWeatherCard
 					currentTemp={currentTemp}
-					currentLocation={currentLocation}
+					currentCity={currentCity}
+					currentCountry={currentCountry}
+					currentCondition={currentCondition}
 				/>
 			) : (
 				<h2 className="flex justify-center items-start m-4 text-2xl font-medium text-red-500">

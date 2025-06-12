@@ -8,7 +8,6 @@ export async function GET() {
 		if (!response.ok) {
 			return NextResponse.json({ success: false, error: 'Failed to fetch weather data' }, { status: 500 });
 		}
-
 		return NextResponse.json(data);
 	} catch {
 		return NextResponse.json({ success: false, error: 'Failed to fetch weather data' }, { status: 500 });
