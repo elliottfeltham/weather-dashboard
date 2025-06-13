@@ -12,7 +12,6 @@ export default function Home() {
 
 	const [error, setError] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
-	const [isDarkMode, setIsDarkMode] = useState(true);
 
 	const fetchWeather = async () => {
 		try {
@@ -46,21 +45,17 @@ export default function Home() {
 		fetchWeather();
 	}, []);
 
-	function toggleDarkMode() {
-		setIsDarkMode((prevMode: boolean) => !prevMode);
-	}
-
 	if (isLoading) {
 		return (
-			<div className="flex items-center justify-center h-screen font-sans">
+			<div className="h-screen flex items-center justify-center font-sans bg-neutral-800 text-white">
 				<h1 className="text-3xl">Loading...</h1>
 			</div>
 		);
 	}
 
 	return (
-		<div className="flex items-center flex-col justify-start m-4 h-screen font-sans">
-			<Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+		<div className="h-screen w-full flex items-center flex-col justify-start font-sans dark:bg-neutral-800 dark:text-white  bg-neutral-100">
+			<Header />
 			{!error ? (
 				<CurrentWeatherCard
 					currentTemp={currentTemp}

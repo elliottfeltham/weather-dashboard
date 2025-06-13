@@ -1,25 +1,19 @@
 import React from "react";
+import { Search } from "lucide-react";
+import DarkModeToggle from "./DarkModeToggle";
 
-import { SunIcon } from "lucide-react";
-import { MoonIcon } from "lucide-react";
-
-type HeaderComponentProps = {
-	isDarkMode: boolean;
-	toggleDarkMode: () => void;
-};
-
-const Header = ({ toggleDarkMode, isDarkMode }: HeaderComponentProps) => {
+const Header = () => {
 	return (
-		<header className="flex flex-row w-full justify-between m-6 p-6 items-center border rounded-2xl shadow-xs shadow-white">
+		<header className="flex flex-row w-11/12 justify-between my-6 p-6 items-center border rounded-2xl shadow-xs shadow-white">
 			<span className="text-xl font-bold">
 				Hello, welcome to <em>the weather</em>
 			</span>
-			<div className="mr-20 border rounded-full p-2">
-				{isDarkMode ? (
-					<SunIcon onClick={toggleDarkMode} size={20} />
-				) : (
-					<MoonIcon onClick={toggleDarkMode} size={20} />
-				)}
+			<div className="flex flex-auto items-center border rounded-2xl mx-6 p-2">
+				<Search size={20} />
+				<span className="text-gray-400">Search City Name...</span>
+			</div>
+			<div>
+				<DarkModeToggle />
 			</div>
 		</header>
 	);

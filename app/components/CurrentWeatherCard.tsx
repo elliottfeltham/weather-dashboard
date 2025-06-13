@@ -29,6 +29,8 @@ const CurrentWeatherCard = ({
 	function getWeatherIcon(weatherId: number) {
 		const firstDigit = Math.floor(weatherId / 100);
 
+		console.log(weatherId);
+
 		switch (firstDigit) {
 			case 2:
 				return <CloudLightning size={50} color="grey" />;
@@ -43,8 +45,8 @@ const CurrentWeatherCard = ({
 			case 8:
 				if (weatherId === 800 || weatherId === 801) {
 					return <Sun size={50} color="yellow" />;
-				} else if (weatherId === 802) {
-					return <CloudSun size={50} color="white" />;
+				} else if (weatherId === 802 || weatherId === 803) {
+					return <CloudSun size={50} color="yellow" />;
 				} else {
 					return <Cloud size={50} color="white" />;
 				}
@@ -52,6 +54,7 @@ const CurrentWeatherCard = ({
 				return <Sun size={50} color="yellow" />;
 		}
 	}
+
 	return (
 		<div className="border rounded-2xl p-10 shadow-xs shadow-white">
 			<span className="flex items-center gap-2">
