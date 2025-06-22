@@ -54,7 +54,7 @@ export default function Home() {
 	}
 
 	return (
-		<div className="h-screen w-full flex items-center flex-col justify-start font-sans dark:bg-neutral-800 dark:text-white  bg-neutral-100">
+		<div className="h-screen w-full flex items-center flex-col justify-start font-sans dark:bg-neutral-800 dark:text-white  bg-neutral-300">
 			<Header />
 			{!error ? (
 				<CurrentWeatherCard
