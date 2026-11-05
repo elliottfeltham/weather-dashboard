@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Weather Dashboard
 
-## Getting Started
+A responsive Next.js learning project that retrieves current weather through a
+server-side API route. The browser requests the local route, so the OpenWeather
+API key remains on the server.
 
-First, run the development server:
+## Current features
+
+- Current temperature and weather condition for London
+- Country and city display
+- Light and dark themes
+- Responsive weather card
+- Server-only OpenWeather credential
+- Basic loading and error states
+
+## Architecture
+
+```mermaid
+flowchart LR
+    B[Next.js client] --> R[GET /api/weather]
+    R --> O[OpenWeather current weather API]
+    O --> R
+    R --> B
+```
+
+## Local setup
+
+Requirements: Node.js 20.19+ or 22+ and an OpenWeather API key.
+
+```bash
+npm ci
+cp .env.example .env.local
+```
+
+Add your key to the ignored local environment file:
+
+```dotenv
+OPENWEATHERMAP_API_KEY=your_key_here
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Basic checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+## Status and limitations
 
-To learn more about Next.js, take a look at the following resources:
+This is intentionally presented as an evolving Next.js learning project. The
+current interface displays one default city; the planned search, multi-day
+forecast, dynamic city routes, and persistence features are not implemented
+yet. Provider availability and free-tier limits still apply, and this project
+does not include production monitoring or a shared response cache.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md) for the learning roadmap.

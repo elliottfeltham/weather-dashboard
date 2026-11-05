@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
 	title: "Weather Dashboard",
-	description: "Practice project with Next.js",
+	description: "A responsive current-weather dashboard built with Next.js.",
 };
 
 export default function RootLayout({
