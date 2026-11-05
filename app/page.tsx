@@ -13,35 +13,36 @@ export default function Home() {
 	const [error, setError] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 
-	useEffect(() => {
-		let cancelled = false;
+	const fetchWeather = async () => {
+		try {
+			setIsLoading(true);
+			setError(false);
 
-		async function loadWeather() {
-			try {
-				const response = await fetch("/api/weather");
-				const data = await response.json();
+			// Testing Purposes
+			await new Promise((resolve) => setTimeout(resolve, 2000));
+			// Remove later
 
-				if (cancelled) return;
-				if (!response.ok || data.success === false) {
-					setError(true);
-					return;
-				}
+			const response = await fetch("/api/weather");
+			const data = await response.json();
 
-				setCurrentTemp(Math.floor(data.main.temp));
-				setCurrentCity(data.name);
-				setCurrentCondition(data.weather[0].id);
-				setCurrentCountry(data.sys.country);
-			} catch {
-				if (!cancelled) setError(true);
-			} finally {
-				if (!cancelled) setIsLoading(false);
+			if (!response.ok || data.success === false) {
+				setError(true);
+				return;
 			}
-		}
 
-		void loadWeather();
-		return () => {
-			cancelled = true;
-		};
+			setCurrentTemp(Math.floor(data.main.temp));
+			setCurrentCity(data.name);
+			setCurrentCondition(data.weather[0].id);
+			setCurrentCountry(data.sys.country);
+		} catch {
+			setError(true);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	useEffect(() => {
+		fetchWeather();
 	}, []);
 
 	if (isLoading) {

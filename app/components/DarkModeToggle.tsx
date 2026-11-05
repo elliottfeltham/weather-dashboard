@@ -1,17 +1,15 @@
 "use client";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useSyncExternalStore } from "react";
-
-const subscribe = () => () => {};
+import { useEffect, useState } from "react";
 
 const DarkModeToggle = () => {
-	const mounted = useSyncExternalStore(
-		subscribe,
-		() => true,
-		() => false,
-	);
+	const [mounted, setMounted] = useState(false);
 	const { theme, resolvedTheme, setTheme } = useTheme();
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	if (!mounted) return null;
 
